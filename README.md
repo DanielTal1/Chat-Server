@@ -6,7 +6,7 @@ The client side built using react.
 The server side was build using ASP.NET with entity framework to manage the database of the chat.   
 In addition the server includes a rating system that was build with MVC and a service that uses a static list with Dependency Injection.    
 
-## You are currently in the repository of the client side  
+## You are currently in the repository of the server side 
 
 ## How to run
 The client and server sides need to be run separately.  
@@ -22,7 +22,7 @@ In addition the server will be able to send asynchronous notifications to the cl
 Clone the repository:  
 Open Visual Studio or other ASP.NET IDE and choose "Clone a repository"  
 enter the following link:  
-https://github.com/DanielTal1/server-try.git  
+https://github.com/DanielTal1/Server-Ex3.git  
 
 #### `download the needed packages`  
 
@@ -30,7 +30,9 @@ Write the following lines int the Package Manager Console:
 Install-Package EntityFramework (if you don't have it already)  
 Enable-Migrations(if you didn't use Entity Framework before)  
 Update-Database  
-This will initialize the database given by entity framework.  
+This will initialize the database given by entity framework.
+Then install firebase Admin.
+
 Lastly install the signalR library by:  
 right click on the server-try project=> Add => Client-Side Library  
 then choose the following:  
@@ -40,9 +42,10 @@ mark choose specific files and choose the files:
 signalr.js, signalr.min.js inside the folders: files=>dist=>browser  
 This will enable the signalr library in the server.  
 
-#### `run the project`  
+#### `run the project`
+port 7038
 
-### How to run client  
+### How to run client react  
 
 #### `git clone`  
 
