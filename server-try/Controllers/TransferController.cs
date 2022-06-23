@@ -7,6 +7,8 @@ using Message = server.Models.Message;
 using server_try.Services;
 using server_try.Models;
 using System.Diagnostics;
+using Microsoft.AspNetCore.SignalR;
+using server_try.Hubs;
 
 namespace server_try.Controllers
 {
@@ -14,14 +16,16 @@ namespace server_try.Controllers
     [Route("api/[controller]")]
     public class TransferController : Controller
     {
+        private IHubContext<MyHub> _hub;
         private readonly server_tryContext _context;
         private ITokenService _tokenService;
         private PushNotifications _pushNotifications;
-        public TransferController(server_tryContext context)
+        public TransferController(server_tryContext context, IHubContext<MyHub> hub)
         {
             _context = context;
             _tokenService = new TokensService();
             _pushNotifications= new PushNotifications();
+            _hub = hub;
         }
 
         [HttpPost]
@@ -52,6 +56,10 @@ namespace server_try.Controllers
             if (result != "Error")
             {
                 await _pushNotifications.SendNotification(result, "New Message From: " + from, content);
+            }
+            else
+            {
+                _hub.Clients.All.SendAsync("ChangeRecieved", content);
             }
             return StatusCode(StatusCodes.Status201Created);
         }
