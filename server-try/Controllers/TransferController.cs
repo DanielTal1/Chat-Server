@@ -4,6 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using server_try.Data;
 using server.Models;
 using Message = server.Models.Message;
+using server_try.Services;
+using server_try.Models;
+using System.Diagnostics;
 
 namespace server_try.Controllers
 {
@@ -12,10 +15,13 @@ namespace server_try.Controllers
     public class TransferController : Controller
     {
         private readonly server_tryContext _context;
-
+        private ITokenService _tokenService;
+        private PushNotifications _pushNotifications;
         public TransferController(server_tryContext context)
         {
             _context = context;
+            _tokenService = new TokensService();
+            _pushNotifications= new PushNotifications();
         }
 
         [HttpPost]
@@ -42,6 +48,11 @@ namespace server_try.Controllers
             DateTime date2 = TimeZoneInfo.ConvertTime(date1, tz);
             currentContact.lastdate = date2.ToString("o");
             await _context.SaveChangesAsync();
+            string result = _tokenService.getToken(to);
+            if (result != "Error")
+            {
+                await _pushNotifications.SendNotification(result, "New Message From: " + from, content);
+            }
             return StatusCode(StatusCodes.Status201Created);
         }
     }

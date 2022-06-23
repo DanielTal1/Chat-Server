@@ -1,9 +1,13 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using FirebaseAdmin;
+using FirebaseAdmin.Messaging;
+using Google.Apis.Auth.OAuth2;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using server_try.Data;
 using server_try.Hubs;
+using server_try.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +19,7 @@ builder.Services.AddControllers();
 builder.Services.AddControllersWithViews();
 builder.Services.AddSignalR();
 builder.Services.AddSingleton<MyHub>();
+builder.Services.AddSingleton<PushNotifications>();
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(builder =>
@@ -48,7 +53,6 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
-
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
@@ -56,5 +60,6 @@ app.UseEndpoints(endpoints =>
 {
     endpoints.MapHub<MyHub>("/myHub");
 });
+
 
 app.Run();

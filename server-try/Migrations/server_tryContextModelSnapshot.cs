@@ -38,18 +38,16 @@ namespace server_try.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("server")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("id", "UserId");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Contact");
+                    b.ToTable("Contact", (string)null);
                 });
 
             modelBuilder.Entity("server.Models.Message", b =>
@@ -67,11 +65,9 @@ namespace server_try.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("content")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("created")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("sent")
@@ -81,7 +77,7 @@ namespace server_try.Migrations
 
                     b.HasIndex("Contactid", "ContactUserId");
 
-                    b.ToTable("Message");
+                    b.ToTable("Message", (string)null);
                 });
 
             modelBuilder.Entity("server.Models.User", b =>
@@ -93,20 +89,17 @@ namespace server_try.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nickname")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("User");
+                    b.ToTable("User", (string)null);
                 });
 
             modelBuilder.Entity("server.Models.Contact", b =>

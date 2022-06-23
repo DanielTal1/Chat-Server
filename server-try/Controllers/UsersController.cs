@@ -7,19 +7,21 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using server.Models;
 using server_try.Data;
+using server_try.Services;
 
 namespace server_try.Controllers
 {
 
-[ApiController]
+    [ApiController]
     [Route("api/[controller]")]
     public class UsersController : Controller
     {
         private readonly server_tryContext _context;
-
+        private ITokenService _tokenService;
         public UsersController(server_tryContext context)
         {
             _context = context;
+            _tokenService = new TokensService();
         }
 
         // GET: Users
@@ -39,7 +41,7 @@ namespace server_try.Controllers
             {
                 return Json(user);
             }
-            return Json("Failed");
+            return null;
         }
 
 
@@ -53,7 +55,7 @@ namespace server_try.Controllers
                         select u;
                 if (q.Count() > 0)
                 {
-                    return Json("Error");
+                    return BadRequest();
                 }
                 else
                 {
@@ -61,7 +63,22 @@ namespace server_try.Controllers
                     await _context.SaveChangesAsync();
                 }
             }
-            return Json("Success");
+            return StatusCode(StatusCodes.Status201Created); ;
+        }
+
+
+        [HttpPost("Token")]
+        public async Task<IActionResult> Token([FromBody] Dictionary<string, string> data)
+        {
+            string username = data["Username"];
+            string token = data["Token"];
+            var currentUser = await _context.User.Include(x => x.ContactsList).FirstOrDefaultAsync(u => u.UserName == username);
+            if (currentUser == null)
+            {
+                return NotFound();
+            }
+            _tokenService.addToken(username, token);
+            return StatusCode(StatusCodes.Status201Created); ;
         }
 
     }
