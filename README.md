@@ -1,8 +1,6 @@
 # Chat app Project- Margarita Kilinkarov, Daniel Tal  
 
 Real time Chat app that inculdes both client and server side.   
-The client side consists 3 pages: Login, Signup, Chat.    
-The client side built using react.    
 The server side was build using ASP.NET with entity framework to manage the database of the chat.   
 In addition the server includes a rating system that was build with MVC and a service that uses a static list with Dependency Injection.    
 
@@ -44,29 +42,6 @@ This will enable the signalr library in the server.
 
 #### `run the project`
 port 7038
-
-### How to run client react  
-
-#### `git clone`  
-
-Clone the repository:   
-Open your preferred IDE,    
-Write the following line in the terminal:   
-git clone https://github.com/Rittaki/Chat-front.git  
-
-#### `download the needed packages`  
-
-Write the following line in the terminal:   
-npm i  
-This will automatically download the necessary dependencies of the project.   
-In addition write the following line in the terminal:  
-npm install @microsoft/signalr  
-This will enable signalr in the client.  
-
-#### `run project`  
-
-Run the project with "npm start"   
-
 
 ## How to use the app  
 
