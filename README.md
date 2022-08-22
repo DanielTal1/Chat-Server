@@ -1,4 +1,4 @@
-# Chat app Project- Margarita Kilinkarov, Daniel Tal  
+# Chat app Server
 
 Real time Chat app that inculdes both client and server side.   
 The server side was build using ASP.NET with entity framework to manage the database of the chat.   
