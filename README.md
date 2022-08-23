@@ -60,3 +60,7 @@ At any time you can head over to the rank system with the link in the bottom of 
 and then head back to the chat app by clicking on "Go to chat" in the menu on the top left corner.  
 
 ##
+
+![Screenshot](server1.png)
+
+![Screenshot](server2.png)
