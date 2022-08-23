@@ -58,3 +58,5 @@ However, if you choose to add users manualy to the entity framework database ple
   
 At any time you can head over to the rank system with the link in the bottom of the screen,  
 and then head back to the chat app by clicking on "Go to chat" in the menu on the top left corner.  
+
+##
